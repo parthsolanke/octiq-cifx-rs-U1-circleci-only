@@ -1,3 +1,5 @@
+<!-- U1-circleci-only -->
+
 # U1-circleci-only
 
 The OSW-1178 message. An unsupported provider must be NAMED and must never be mistaken for 'no CI'.
