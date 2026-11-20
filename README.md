@@ -2,7 +2,7 @@
 
 The OSW-1178 message. An unsupported provider must be NAMED and must never be mistaken for 'no CI'.
 
-## How to test
+**How to test**
 
 1. Octiq QA -> Import -> GitHub -> this repo
 2. In chat: `add a comment at the top of the README`
