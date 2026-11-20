@@ -1,17 +1,41 @@
-# U1-circleci-only
+# octiq-cifx-rs-U1-circleci-only
 
-The OSW-1178 message. An unsupported provider must be NAMED and must never be mistaken for 'no CI'.
+A small, dependency-free Rust library (`fixture`) whose build and tests run on CircleCI.
 
-## How to test
+- Library source: `src/lib.rs` (exports `add` and `double`, with inline unit tests).
+- Integration tests: `tests/integration.rs` (exercise the public API from outside the crate).
+- CI configuration: `.circleci/config.yml` (CircleCI 2.1 pipeline).
 
-1. Octiq QA -> Import -> GitHub -> this repo
-2. In chat: `add a comment at the top of the README`
-3. Read the two lines in the reply.
+## Requirements
 
-**Line 1 (the CI verdict - THIS IS THE TEST):**
+- Rust toolchain (edition 2021, tested on `cimg/rust:1.77`).
+- No external dependencies.
 
-    Tests not run - Currently, we support GitHub Actions, GitLab CI, Jenkins and Azure Pipelines. Found .circleci/config.yml, so tests were not checked.
+## Build
 
-**Line 2 (the build/test outcome):**
+```
+cargo build
+```
 
-    Tests passed - 4 passed        (or a real failure, never "no recipe")
+## Test
+
+```
+cargo test
+```
+
+This runs both the inline unit tests in `src/lib.rs` and the integration tests in `tests/integration.rs`.
+
+## CircleCI pipeline
+
+The pipeline is defined in `.circleci/config.yml`. It has a single `test` job that:
+
+1. Checks out the repository.
+2. Runs `cargo test`.
+
+The `main` workflow runs the `test` job on every push.
+
+To connect the project to CircleCI, link the repository from the CircleCI dashboard; the pipeline then runs automatically on each push. To run it locally, use the CircleCI CLI:
+
+```
+circleci local execute --job test
+```
